@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Message Board</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -25,15 +25,15 @@
             </button>
             <a class="navbar-brand" href="#">Message Board</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div th:action="@{/login}" method="post" id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
                 <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control" />
+                    <input type="text" name="username" placeholder="User" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control" />
+                    <input type="password" name="password" placeholder="Password" class="form-control" />
                 </div>
-                <button type="submit" class="btn btn-success">Log in</button>
+                <button type="submit" class="btn btn-success" value="Sign In">Log in</button>
             </form>
         </div><!--/.navbar-collapse -->
     </div>
@@ -45,18 +45,17 @@
             <div class="hero-unit">
                 <h1>Welcome to Message Board!</h1>
                 <p>Please sign up or log in to use Message Board</p>
-                <a href="people/" class="btn btn-primary btn-large">Sign up</a>
+                <a href="signup" class="btn btn-primary btn-large">Sign up</a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
+<div sec:authorize="isAnonymous()" class="container">
     <div class="row">
         <div class="span12">
 
             <h2>Our customers</h2>
-
 
             <div class="col-xs-3" >
                 <div class="well">
@@ -78,6 +77,23 @@
 
         </div>
     </div>
+</div>
+
+<!--Example-->
+<div sec:authorize="isAuthenticated()">
+    Authorized user
+</div>
+
+<!--Example-->
+<div sec:authorize="hasRole('USER')">
+    User who has a role "USER"
+</div>
+
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
 </div>
 
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
