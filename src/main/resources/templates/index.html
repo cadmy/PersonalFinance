@@ -27,7 +27,7 @@
             <a class="navbar-brand" href="#">Message Board</a>
         </div>
 
-        <div id="navbar" class="navbar-collapse collapse">
+        <div sec:authorize="isAnonymous()" id="anonymous-navbar" class="navbar-collapse collapse">
             <form th:action="@{/login}" method="post" class="navbar-form navbar-right">
                 <div class="form-group">
                     <input type="text" name="username" placeholder="User" class="form-control" />
@@ -37,8 +37,13 @@
                 </div>
                 <button type="submit" class="btn btn-success" value="Sign In">Log in</button>
             </form>
-        </div><!--/.navbar-collapse -->
+        </div>
 
+        <div sec:authorize="isAuthenticated()" id="authenticated-navbar"  class="navbar-collapse collapse">
+            <form th:action="@{/logout}" method="post" class="navbar-form navbar-right">
+                <button type="submit" class="btn btn-success" value="Sign Out">Sign Out</button>
+            </form>
+        </div><!--/.navbar-collapse -->
     </div>
 </nav>
 
@@ -83,20 +88,13 @@
 </div>
 
 <!--Example-->
-<div sec:authorize="isAuthenticated()">
+<div sec:authorize="isAuthenticated()" class="container">
     Authorized user
 </div>
 
 <!--Example-->
-<div sec:authorize="hasRole('USER')">
+<div sec:authorize="hasRole('USER')" class="container">
     User who has a role "USER"
-</div>
-
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
 </div>
 
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
