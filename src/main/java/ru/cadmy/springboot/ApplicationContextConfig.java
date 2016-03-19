@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.*;
@@ -19,6 +20,7 @@ import java.util.Properties;
  * Created by Cadmy on 11.03.2016.
  */
 @Configuration
+@Profile("dev")
 @ComponentScan("ru.cadmy.springboot")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
@@ -27,7 +29,7 @@ public class ApplicationContextConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "ru.cadmy.springboot" });
+        em.setPackagesToScan("ru.cadmy.springboot");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

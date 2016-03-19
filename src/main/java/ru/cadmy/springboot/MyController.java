@@ -25,22 +25,12 @@ public class MyController {
     @Autowired
     private PersonService personService;
 
-    @RequestMapping("/")
+    @RequestMapping(value = {"/home", "/login", "/"})
     public String index(Map<String, Object> map) {
 
         map.put("person", new Person());
         map.put("peopleList", personService.listPeople());
 
-        return "index";
-    }
-
-    @RequestMapping("/home")
-    public String home() {
-        return "index";
-    }
-
-    @RequestMapping("/login")
-    public String login() {
         return "index";
     }
 
@@ -52,15 +42,15 @@ public class MyController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addPerson(@ModelAttribute("person") Person person, BindingResult result) {
         personService.addPerson(person);
-        logger.info("Person ".join(person.getLastName()).join(" was created"));
-        return "redirect:/people/";
+        logger.info(String.join(" was created"));
+        return "redirect:/";
     }
 
     @RequestMapping("/delete/{personId}")
     public String deletePerson(@PathVariable("personId") Integer personId) {
         personService.removePerson(personId);
-        logger.info("Person #".join(personId.toString()).join(" was deleted"));
-        return "redirect:/people/";
+        logger.info(String.join(" was deleted"));
+        return "redirect:/";
     }
 
     /** Error page. */
