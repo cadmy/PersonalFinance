@@ -1,4 +1,4 @@
-package ru.cadmy.springboot;
+package ru.cadmy.finance.configuration;
 
 import org.springframework.context.annotation.Bean;
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +21,7 @@ import java.util.Properties;
  */
 @Configuration
 @Profile("dev")
-@ComponentScan("ru.cadmy.springboot")
+@ComponentScan("ru.cadmy.finance.model")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
 
@@ -29,7 +29,7 @@ public class ApplicationContextConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("ru.cadmy.springboot");
+        em.setPackagesToScan("ru.cadmy.finance.model");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

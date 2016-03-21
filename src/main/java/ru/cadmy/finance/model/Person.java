@@ -1,4 +1,4 @@
-package ru.cadmy.springboot;
+package ru.cadmy.finance.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

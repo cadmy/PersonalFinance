@@ -1,4 +1,4 @@
-package ru.cadmy.springboot;
+package ru.cadmy.finance;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;

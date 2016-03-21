@@ -1,11 +1,11 @@
-package ru.cadmy.springboot;
+package ru.cadmy.finance.service;
 
 /**
  * Created by Cadmy on 10.03.2016.
  */
 import java.util.List;
 
-import ru.cadmy.springboot.Person;
+import ru.cadmy.finance.model.Person;
 
 public interface PersonService {
 

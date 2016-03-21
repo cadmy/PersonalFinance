@@ -1,4 +1,4 @@
-package ru.cadmy.springboot;
+package ru.cadmy.finance.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import ru.cadmy.finance.model.Person;
+import ru.cadmy.finance.service.PersonService;
 
 /**
  * Created by Cadmy on 05.03.2016.
