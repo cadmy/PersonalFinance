@@ -5,11 +5,11 @@ package ru.cadmy.finance.service;
  */
 import java.util.List;
 
-import ru.cadmy.finance.model.Person;
+import ru.cadmy.finance.model.User;
 
 public interface PersonService {
 
-    public void addPerson(Person person);
-    public List<Person> listPeople();
+    public void addPerson(User user);
+    public List<User> listPeople();
     public void removePerson(Integer id);
 }

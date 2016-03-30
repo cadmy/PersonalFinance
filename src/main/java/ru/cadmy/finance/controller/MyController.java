@@ -14,7 +14,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import ru.cadmy.finance.model.Person;
+import ru.cadmy.finance.model.BalanceRecord;
+import ru.cadmy.finance.model.User;
+import ru.cadmy.finance.service.BalanceService;
+import ru.cadmy.finance.service.BalanceServiceImpl;
 import ru.cadmy.finance.service.PersonService;
 
 /**
@@ -28,10 +31,13 @@ public class MyController {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private BalanceService balanceService;
+
     @RequestMapping(value = {"/home", "/login", "/"})
     public String index(Map<String, Object> map) {
 
-        map.put("person", new Person());
+        map.put("person", new User());
         map.put("peopleList", personService.listPeople());
 
         return "index";
@@ -42,17 +48,17 @@ public class MyController {
         return "signup";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("person") Person person, BindingResult result) {
-        personService.addPerson(person);
+    @RequestMapping(value = "/addPerson", method = RequestMethod.POST)
+    public String addPerson(@ModelAttribute("user") User user, BindingResult result) {
+        personService.addPerson(user);
         logger.info(String.join(" was created"));
         return "redirect:/";
     }
 
-    @RequestMapping("/delete/{personId}")
-    public String deletePerson(@PathVariable("personId") Integer personId) {
-        personService.removePerson(personId);
-        logger.info(String.join(" was deleted"));
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addPerson(@ModelAttribute("balanceRecord") BalanceRecord balanceRecord, BindingResult result) {
+        balanceService.addBalanceRecord(balanceRecord);
+        logger.info(String.join(" was created"));
         return "redirect:/";
     }
 

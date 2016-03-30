@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "PERSON")
-public @Data class Person {
+@Table(name = "USER")
+public @Data class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -32,7 +32,7 @@ public @Data class Person {
     @Column(name = "last_name", nullable = false, length = 500)
     private String lastName;
 
-    @Column(name = "admin", nullable = false)
-    private boolean admin;
+    @Column(name = "role", nullable = false, length = 500)
+    private String role;
 
 }

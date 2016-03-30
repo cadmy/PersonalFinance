@@ -12,6 +12,23 @@
     </link>
 </head>
 <body>
-<div class="container">Sign up</div>
+    <form action="#" method="post" th:action="@{/add}" th:object="${user}" class="form-group row">
+        <label path="email">Email</label>
+        <input type="text" th:field="*{email}" />
+
+        <label path="login">Login</label>
+        <input type="text" th:field="*{login}" />
+
+        <label path="password">Password</label>
+        <input type="password" th:field="*{password}" />
+
+        <label path="firstName">First Name</label>
+        <input type="text" th:field="*{firstName}" />
+
+        <label path="lastName">Last Name</label>
+        <input type="text" th:field="*{lastName}" />
+
+        <input type="submit" value="Add Person" class="btn"/>
+    </form>
 </body>
 </html>

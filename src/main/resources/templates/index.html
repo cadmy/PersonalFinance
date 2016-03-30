@@ -24,7 +24,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Message Board</a>
+            <a class="navbar-brand" href="#">Personal Finance</a>
         </div>
 
         <div sec:authorize="isAnonymous()" id="anonymous-navbar" class="navbar-collapse collapse">
@@ -51,8 +51,8 @@
     <div class="row">
         <div class="span12">
             <div class="hero-unit">
-                <h1>Welcome to Message Board!</h1>
-                <p>Please sign up or log in to use Message Board</p>
+                <h1>Welcome to Personal Finance System!</h1>
+                <p>Please sign up or log in to use Personal Finance System</p>
                 <a href="signup" class="btn btn-primary btn-large">Sign up</a>
             </div>
         </div>
@@ -94,21 +94,12 @@
                 <div class="page-header">
                     <h1>Simple CRUD Page</h1>
                 </div>
-                <form action="#" method="post" th:action="@{/add}" th:object="${person}" class="form-vertical">
-                    <label path="email">Email</label>
-                    <input type="text" th:field="*{email}" />
+                <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
+                    <label path="value">Email</label>
+                    <input type="text" th:field="*{value}" />
 
-                    <label path="login">Login</label>
-                    <input type="text" th:field="*{login}" />
-
-                    <label path="password">Password</label>
-                    <input type="text" th:field="*{password}" />
-
-                    <label path="firstName">First Name</label>
-                    <input type="text" th:field="*{firstName}" />
-
-                    <label path="lastName">Last Name</label>
-                    <input type="text" th:field="*{lastName}" />
+                    <label path="category">Login</label>
+                    <input type="text" th:field="*{category}" />
 
                     <input type="submit" value="Add Person" class="btn"/>
                 </form>

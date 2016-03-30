@@ -5,40 +5,37 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
-import ru.cadmy.finance.model.Person;
-import ru.cadmy.finance.service.PersonService;
+import ru.cadmy.finance.model.User;
 
 /**
  * Created by Cadmy on 10.03.2016.
  */
 
 @Service
-public class PersonServiceImpl implements PersonService {
+public class PersonServiceImpl extends ModelService implements PersonService {
 
-    @PersistenceContext
-    EntityManager em;
-
+    @Override
     @Transactional
-    public void addPerson(Person person) {
-        em.persist(person);
+    public void addPerson(User user) {
+        em.persist(user);
     }
 
+    @Override
     @Transactional
-    public List<Person> listPeople() {
-        CriteriaQuery<Person> c = em.getCriteriaBuilder().createQuery(Person.class);
-        c.from(Person.class);
+    public List<User> listPeople() {
+        CriteriaQuery<User> c = em.getCriteriaBuilder().createQuery(User.class);
+        c.from(User.class);
         return em.createQuery(c).getResultList();
     }
 
+    @Override
     @Transactional
     public void removePerson(Integer id) {
-        Person person = em.find(Person.class, id);
-        if (null != person) {
-            em.remove(person);
+        User user = em.find(User.class, id);
+        if (user != null) {
+            em.remove(user);
         }
     }
 
