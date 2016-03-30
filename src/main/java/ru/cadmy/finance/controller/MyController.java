@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import ru.cadmy.finance.model.BalanceRecord;
 import ru.cadmy.finance.model.User;
 import ru.cadmy.finance.service.BalanceService;
-import ru.cadmy.finance.service.BalanceServiceImpl;
-import ru.cadmy.finance.service.PersonService;
+import ru.cadmy.finance.service.UserService;
 
 /**
  * Created by Cadmy on 05.03.2016.
@@ -29,7 +27,7 @@ public class MyController {
     final static Logger logger = Logger.getLogger(MyController.class);
 
     @Autowired
-    private PersonService personService;
+    private UserService userService;
 
     @Autowired
     private BalanceService balanceService;
@@ -37,8 +35,8 @@ public class MyController {
     @RequestMapping(value = {"/home", "/login", "/"})
     public String index(Map<String, Object> map) {
 
-        map.put("person", new User());
-        map.put("peopleList", personService.listPeople());
+        map.put("balanceRecord", new BalanceRecord());
+        map.put("balanceRecordList", balanceService.balanceRecordList(userService.getCurrentUser()));
 
         return "index";
     }
@@ -50,7 +48,7 @@ public class MyController {
 
     @RequestMapping(value = "/addPerson", method = RequestMethod.POST)
     public String addPerson(@ModelAttribute("user") User user, BindingResult result) {
-        personService.addPerson(user);
+        userService.addUser(user);
         logger.info(String.join(" was created"));
         return "redirect:/";
     }

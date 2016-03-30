@@ -96,16 +96,16 @@
                 </div>
                 <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
                     <label path="value">Email</label>
-                    <input type="text" th:field="*{value}" />
+                    <input type="number" th:field="*{value}" />
 
                     <label path="category">Login</label>
                     <input type="text" th:field="*{category}" />
 
-                    <input type="submit" value="Add Person" class="btn"/>
+                    <input type="submit" value="Add balance record" class="btn"/>
                 </form>
 
-                <if th:if="${not #lists.isEmpty(peopleList)}">
-                    <h3>People</h3>
+                <if th:if="${not #lists.isEmpty(balanceRecordList)}">
+                    <h3>Balance</h3>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -114,9 +114,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="person : ${peopleList}">
-                                <td th:text="${person.lastName}"></td>
-                                <td><form action="delete/${person.id}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
+                            <tr th:each="balanceRecord : ${balanceRecordList}">
+                                <td th:text="${balanceRecord.value}"></td>
+                                <td><form action="delete/${balanceRecord.id}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
                             </tr>
                         </tbody>
                     </table>

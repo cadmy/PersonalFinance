@@ -12,7 +12,7 @@
     </link>
 </head>
 <body>
-    <form action="#" method="post" th:action="@{/add}" th:object="${user}" class="form-group row">
+    <form action="#" method="post" th:action="@{/addPerson}" th:object="${user}" class="form-group row">
         <label path="email">Email</label>
         <input type="text" th:field="*{email}" />
 

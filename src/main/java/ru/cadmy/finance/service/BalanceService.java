@@ -10,6 +10,6 @@ import ru.cadmy.finance.model.User;
  */
 public interface BalanceService {
     public void addBalanceRecord(BalanceRecord balanceRecord);
-    public List<?> listBalanceRecords(User user);
+    public List<?> balanceRecordList(User user);
     public void removeBalanceRecord(Integer id);
 }

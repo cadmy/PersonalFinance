@@ -33,12 +33,31 @@ public class BalanceRecord {
     private Date date;
 
     @Column(name = "sign")
-    private Sign sign;
+    private boolean sign;
 
     @Column(name = "value", nullable = false)
-    private Double value;
+    private Integer value;
 
     @Column(name = "category", nullable = true, length = 500)
     private String category;
 
+    public Integer getValue()
+    {
+        return value;
+    }
+
+    public void setValue(Integer value)
+    {
+        this.value = value;
+    }
+
+    public String getCategory()
+    {
+        return category;
+    }
+
+    public void setCategory(String category)
+    {
+        this.category = category;
+    }
 }
