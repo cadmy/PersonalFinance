@@ -1,9 +1,5 @@
 package ru.cadmy.finance.service;
 
-import org.hibernate.*;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,13 +54,5 @@ public class UserServiceImpl extends ModelService implements UserService
         return em.createQuery(criteriaQuery).getSingleResult();
     }
 
-    /*
-    @Override
-    @Transactional
-    public User getCurrentUser() {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from User where user = 1 ");
-        return (User) query.uniqueResult();
-    }*/
 }
 

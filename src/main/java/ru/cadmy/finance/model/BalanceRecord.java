@@ -1,5 +1,6 @@
 package ru.cadmy.finance.model;
 
+import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import java.util.Date;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "BALANCE")
-public class BalanceRecord {
+public @Data class BalanceRecord {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -40,24 +41,4 @@ public class BalanceRecord {
 
     @Column(name = "category", nullable = true, length = 500)
     private String category;
-
-    public Integer getValue()
-    {
-        return value;
-    }
-
-    public void setValue(Integer value)
-    {
-        this.value = value;
-    }
-
-    public String getCategory()
-    {
-        return category;
-    }
-
-    public void setCategory(String category)
-    {
-        this.category = category;
-    }
 }
