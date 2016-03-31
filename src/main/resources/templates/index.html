@@ -115,6 +115,10 @@
                         </thead>
                         <tbody>
                             <tr th:each="balanceRecord : ${balanceRecordList}">
+                                <td th:text="${balanceRecord.user}"></td>
+                                <td th:text="${balanceRecord.date}"></td>
+                                <td th:text="${balanceRecord.category}"></td>
+                                <td th:text="${balanceRecord.sign}"></td>
                                 <td th:text="${balanceRecord.value}"></td>
                                 <td><form action="delete/${balanceRecord.id}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
                             </tr>
