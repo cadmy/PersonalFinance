@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,9 @@ public class MyController {
     }
 
     @RequestMapping("/signup")
-    public String signup() {
+    public String signup(Map<String, Object> map) {
+        map.put("user", new User());
+        map.put("userList", userService.getUserList());
         return "signup";
     }
 
@@ -54,8 +57,10 @@ public class MyController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("balanceRecord") BalanceRecord balanceRecord, BindingResult result) {
-        balanceService.addBalanceRecord(balanceRecord);
+    public String addBalanceRecord(@ModelAttribute("balanceRecord") BalanceRecord balanceRecord, BindingResult result) {
+        balanceRecord.setUser(userService.getCurrentUser());
+        balanceRecord.setDate(new Date());
+        balanceService.addBalanceRecord(balanceRecord); //TODO breakpoint here and evaluate balanceRecord and everything will become clear
         logger.info(String.join(" was created"));
         return "redirect:/";
     }
