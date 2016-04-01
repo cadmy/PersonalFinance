@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Message Board</title>
+    <title>Finance board</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <!-- Latest compiled and minified CSS -->
@@ -91,40 +91,49 @@
     <div class="container">
         <div class="row">
             <div class="span8 offset2">
-                <div class="page-header">
-                    <h1>Simple CRUD Page</h1>
-                </div>
-                <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
-                    <label path="value">Email</label>
-                    <input type="number" th:field="*{value}" />
-
-                    <label path="category">Login</label>
-                    <input type="text" th:field="*{category}" />
-
-                    <input type="submit" value="Add balance record" class="btn"/>
-                </form>
-
                 <if th:if="${not #lists.isEmpty(balanceRecordList)}">
                     <h3>Balance</h3>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Value</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr th:each="balanceRecord : ${balanceRecordList}">
-                                <td th:text="${balanceRecord.user}"></td>
-                                <td th:text="${balanceRecord.date}"></td>
+                                <td type="datetime" pattern="yyyy.MM.dd" th:field="${balanceRecord.date}"></td>
                                 <td th:text="${balanceRecord.category}"></td>
+                                <td th:text="${balanceRecord.title}"></td>
                                 <td th:text="${balanceRecord.sign}"></td>
-                                <td th:text="${balanceRecord.value}"></td>
+                                <td type="number" th:text="${balanceRecord.value}"></td>
                                 <td><form action="delete/${balanceRecord.id}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
+                            </tr>
+                            <tr>
+                                <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
+
+                                    <td><input type="date" th:field="*{date}" /></td>
+
+                                    <td><input type="text" th:field="*{category}" /></td>
+
+                                    <td><input type="text" th:field="*{title}" /></td>
+
+                                    <td><input type="text" th:field="*{sign}" /></td>
+
+                                    <td><input type="number" th:field="*{value}" /></td>
+
+                                    <td><input type="submit" value="Add balance record" class="btn"/></td>
+                                </form>
                             </tr>
                         </tbody>
                     </table>
                 </if>
+
+
 
             </div>
         </div>

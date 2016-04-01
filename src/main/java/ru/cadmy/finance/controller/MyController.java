@@ -59,7 +59,6 @@ public class MyController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addBalanceRecord(@ModelAttribute("balanceRecord") BalanceRecord balanceRecord, BindingResult result) {
         balanceRecord.setUser(userService.getCurrentUser());
-        balanceRecord.setDate(new Date());
         balanceService.addBalanceRecord(balanceRecord); //TODO breakpoint here and evaluate balanceRecord and everything will become clear
         logger.info(String.join(" was created"));
         return "redirect:/";

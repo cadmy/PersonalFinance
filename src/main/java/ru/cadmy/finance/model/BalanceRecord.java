@@ -2,6 +2,7 @@ package ru.cadmy.finance.model;
 
 import lombok.Data;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -32,6 +33,7 @@ public @Data class BalanceRecord {
     private User user;
 
     @Column(name="date")
+    @DateTimeFormat
     @Type(type="date")
     private Date date;
 
@@ -45,5 +47,6 @@ public @Data class BalanceRecord {
     @Column(name = "category", nullable = true, length = 500)
     private String category;
 
-    //TODO title
+    @Column(name = "title", nullable = true, length = 500)
+    private String title;
 }
