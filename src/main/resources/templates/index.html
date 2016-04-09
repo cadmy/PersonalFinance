@@ -106,7 +106,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="balanceRecord : ${balanceRecordList}">
-                                <td type="datetime" pattern="yyyy.MM.dd" th:field="${balanceRecord.date}"></td>
+                                <td type="text" th:text="${balanceRecord.date}"></td>
                                 <td th:text="${balanceRecord.category}"></td>
                                 <td th:text="${balanceRecord.title}"></td>
                                 <td th:text="${balanceRecord.sign}"></td>

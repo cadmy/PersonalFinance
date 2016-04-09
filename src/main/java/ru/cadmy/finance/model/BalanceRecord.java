@@ -33,7 +33,7 @@ public @Data class BalanceRecord {
     private User user;
 
     @Column(name="date")
-    @DateTimeFormat
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Type(type="date")
     private Date date;
 
