@@ -2,13 +2,17 @@ package ru.cadmy.finance.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -59,7 +63,7 @@ public class MyController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addBalanceRecord(@ModelAttribute("balanceRecord") BalanceRecord balanceRecord, BindingResult result) {
         balanceRecord.setUser(userService.getCurrentUser());
-        balanceService.addBalanceRecord(balanceRecord); //TODO breakpoint here and evaluate balanceRecord and everything will become clear
+        balanceService.addBalanceRecord(balanceRecord);
         logger.info(String.join(" was created"));
         return "redirect:/";
     }

@@ -105,8 +105,9 @@
                         </tr>
                         </thead>
                         <tbody>
+
                             <tr th:each="balanceRecord : ${balanceRecordList}">
-                                <td type="text" th:text="${balanceRecord.date}"></td>
+                                <td type="text" th:text="${balanceRecord.date != null} ? ${#calendars.format(balanceRecord.date, 'dd.MM.yyyy')} : null"></td>
                                 <td th:text="${balanceRecord.category}"></td>
                                 <td th:text="${balanceRecord.title}"></td>
                                 <td th:text="${balanceRecord.sign}"></td>
@@ -122,7 +123,10 @@
 
                                     <td><input type="text" th:field="*{title}" /></td>
 
-                                    <td><input type="text" th:field="*{sign}" /></td>
+                                    <td><select name="cars">
+                                        <option value="COST">COST</option>
+                                        <option value="INCOME">INCOME</option>
+                                    </select></td>
 
                                     <td><input type="number" th:field="*{value}" /></td>
 
