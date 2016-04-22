@@ -104,7 +104,7 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
             throw new UsernameNotFoundException("Username not found");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                user.getState().equals(State.ACTIVE), true, true, true, getGrantedAuthorities(user));
+                user.getState().equals(State.NEW), true, true, true, getGrantedAuthorities(user));
     }
 
 

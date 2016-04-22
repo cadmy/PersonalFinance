@@ -149,6 +149,11 @@
     User who has a role "USER"
 </div>
 
+<!--Example-->
+<div sec:authorize="hasRole('ADMIN')" class="container">
+    User who has a role "ADMIN"
+</div>
+
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
