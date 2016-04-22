@@ -27,8 +27,8 @@ public @Data class BalanceRecord {
     private User user;
 
     @Column(name="date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Type(type="date")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date date;
 
     @Enumerated(EnumType.STRING)

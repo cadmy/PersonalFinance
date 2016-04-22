@@ -7,13 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+
 import ru.cadmy.finance.model.*;
 import ru.cadmy.finance.service.*;
 
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
+
 import javax.servlet.http.HttpServletRequest;
 import java.text.*;
-import java.util.*;
 
 /**
  * Created by Cadmy on 05.03.2016.
@@ -71,8 +80,6 @@ public class MyController {
         {
             balanceRecord.setDate( new Date());
         }
-
-        balanceService.addBalanceRecord(balanceRecord);
         logger.info(String.join(" was created"));
         return "redirect:/";
     }
