@@ -91,7 +91,6 @@
     <div class="container">
         <div class="row">
             <div class="span8 offset2">
-                <if th:if="${not #lists.isEmpty(balanceRecordList)}">
                     <h3>Balance</h3>
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -105,48 +104,44 @@
                         </tr>
                         </thead>
                         <tbody>
-
-                            <tr th:each="balanceRecord : ${balanceRecordList}">
-                                <td type="text" th:text="${balanceRecord.date != null} ? ${#calendars.format(balanceRecord.date, 'dd.MM.yyyy')} : null"></td>
-                                <td th:text="${balanceRecord.category}"></td>
-                                <td th:text="${balanceRecord.title}"></td>
-                                <td th:text="${balanceRecord.sign}"></td>
-                                <td type="number" th:text="${balanceRecord.value}"></td>
-                                <td><form action="delete/${balanceRecord.id}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
-                            </tr>
+                            <if th:if="${not #lists.isEmpty(balanceRecordList)}">
+                                <tr th:each="balanceRecord : ${balanceRecordList}">
+                                    <td type="text" th:text="${balanceRecord.date != null} ? ${#calendars.format(balanceRecord.date, 'dd.MM.yyyy')} : null"></td>
+                                    <td th:text="${balanceRecord.category}"></td>
+                                    <td th:text="${balanceRecord.title}"></td>
+                                    <td th:text="${balanceRecord.sign}"></td>
+                                    <td type="number" th:text="${balanceRecord.value}"></td>
+                                    <td><form action="delete/${balanceRecord.id}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
+                                </tr>
+                            </if>
                             <tr>
                                 <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
-
                                     <td><input type="date" th:field="*{date}" /></td>
-
                                     <td><input type="text" th:field="*{category}" /></td>
-
                                     <td><input type="text" th:field="*{title}" /></td>
-
                                     <td>
                                         <select th:field="*{sign}">
                                             <option value="COST">COST</option>
                                             <option value="INCOME">INCOME</option>
                                         </select>
                                     </td>
-
                                     <td><input type="number" th:field="*{value}" /></td>
-
                                     <td><input type="submit" value="Add balance record" class="btn"/></td>
                                 </form>
                             </tr>
                         </tbody>
                     </table>
-                </if>
-
-
-
             </div>
         </div>
     </div>
 </div>
 
+<!--Example-->
+<div sec:authorize="isAnonymous()" class="container">
+    User who is not authenticated
+</div>
 
+<!--Example-->
 <div sec:authorize="isAuthenticated()" class="container">
     User who is authenticated
 </div>
