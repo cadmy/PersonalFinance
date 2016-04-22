@@ -123,10 +123,12 @@
 
                                     <td><input type="text" th:field="*{title}" /></td>
 
-                                    <td><select name="cars">
-                                        <option value="COST">COST</option>
-                                        <option value="INCOME">INCOME</option>
-                                    </select></td>
+                                    <td>
+                                        <select th:field="*{sign}">
+                                            <option value="COST">COST</option>
+                                            <option value="INCOME">INCOME</option>
+                                        </select>
+                                    </td>
 
                                     <td><input type="number" th:field="*{value}" /></td>
 
@@ -142,6 +144,11 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div sec:authorize="isAuthenticated()" class="container">
+    User who is authenticated
 </div>
 
 <!--Example-->

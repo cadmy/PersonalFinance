@@ -96,6 +96,7 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
         }
     }
 
+    @Override
     @Transactional(readOnly=true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
@@ -106,7 +107,6 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.getState().equals(State.NEW), true, true, true, getGrantedAuthorities(user));
     }
-
 
     private List<GrantedAuthority> getGrantedAuthorities(User user){
         List<GrantedAuthority> authorities = new ArrayList<>();
