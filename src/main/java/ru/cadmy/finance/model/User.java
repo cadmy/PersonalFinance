@@ -27,9 +27,11 @@ public @Data class User
     @Column(name = "last_name", nullable = false, length = 500)
     private String lastName;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="state", nullable=false)
     private State state = State.NEW;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="role", nullable=false)
     private Role role;
 

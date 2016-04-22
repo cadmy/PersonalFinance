@@ -28,20 +28,20 @@
         </div>
 
         <div sec:authorize="isAnonymous()" id="anonymous-navbar" class="navbar-collapse collapse">
-            <form th:action="@{/username}" method="post" class="navbar-form navbar-right">
+            <form th:action="@{/login}" method="post" class="navbar-form navbar-right">
                 <div class="form-group">
                     <input type="text" name="username" placeholder="User" class="form-control" />
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" placeholder="Password" class="form-control" />
                 </div>
-                <button type="submit" class="btn btn-success" value="Sign In">Log in</button>
+                <button type="submit" class="btn btn-success" value="login">Log in</button>
             </form>
         </div>
 
         <div sec:authorize="isAuthenticated()" id="authenticated-navbar"  class="navbar-collapse collapse">
             <form th:action="@{/logout}" method="post" class="navbar-form navbar-right">
-                <button type="submit" class="btn btn-success" value="Sign Out">Sign Out</button>
+                <button type="submit" class="btn btn-success" value="logout">Log out</button>
             </form>
         </div><!--/.navbar-collapse -->
     </div>

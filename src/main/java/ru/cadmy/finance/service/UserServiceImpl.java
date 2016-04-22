@@ -67,7 +67,7 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
 
     @Override
     @Transactional(readOnly=true)
-    public User getUserById(String userId)
+    public User getUserById(Integer userId)
     {
         CriteriaQuery<User> criteriaQuery = em.getCriteriaBuilder().createQuery(User.class);
         Root<User> userRequest = criteriaQuery.from(User.class);

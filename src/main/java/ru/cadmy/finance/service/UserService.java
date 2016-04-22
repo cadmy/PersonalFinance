@@ -14,6 +14,6 @@ public interface UserService
     public void removeUser(Integer id);
     public User getCurrentUser();
     public String getCurrentUsername();
-    public User getUserById(String userId);
+    public User getUserById(Integer userId);
     public User getUserByUsername(String username);
 }
