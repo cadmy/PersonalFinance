@@ -28,7 +28,7 @@
         </div>
 
         <div sec:authorize="isAnonymous()" id="anonymous-navbar" class="navbar-collapse collapse">
-            <form th:action="@{/login}" method="post" class="navbar-form navbar-right">
+            <form th:action="@{/username}" method="post" class="navbar-form navbar-right">
                 <div class="form-group">
                     <input type="text" name="username" placeholder="User" class="form-control" />
                 </div>

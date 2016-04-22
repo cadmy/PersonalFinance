@@ -2,22 +2,18 @@ package ru.cadmy.finance.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.Date;
-import java.util.Map;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import ru.cadmy.finance.model.*;
+import ru.cadmy.finance.service.*;
 
 import javax.servlet.http.HttpServletRequest;
-
-import ru.cadmy.finance.model.BalanceRecord;
-import ru.cadmy.finance.model.User;
-import ru.cadmy.finance.service.BalanceService;
-import ru.cadmy.finance.service.UserService;
+import java.text.*;
+import java.util.*;
 
 /**
  * Created by Cadmy on 05.03.2016.
@@ -26,12 +22,19 @@ import ru.cadmy.finance.service.UserService;
 public class MyController {
 
     final static Logger logger = Logger.getLogger(MyController.class);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
     private UserService userService;
 
     @Autowired
     private BalanceService balanceService;
+
+    @InitBinder
+    public void dataBinding(WebDataBinder binder) {
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
 
     @RequestMapping(value = {"/home", "/login", "/"})
     public String index(Map<String, Object> map) {
@@ -58,8 +61,18 @@ public class MyController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addBalanceRecord(@ModelAttribute("balanceRecord") BalanceRecord balanceRecord, BindingResult result) {
+        //TODO breakpoint here and evaluate balanceRecord and everything will become clear
         balanceRecord.setUser(userService.getCurrentUser());
-        balanceService.addBalanceRecord(balanceRecord); //TODO breakpoint here and evaluate balanceRecord and everything will become clear
+        try
+        {
+            balanceRecord.setDate( dateFormat.parse( result.getFieldValue("date").toString() ) );
+        }
+        catch (ParseException e)
+        {
+            balanceRecord.setDate( new Date());
+        }
+
+        balanceService.addBalanceRecord(balanceRecord);
         logger.info(String.join(" was created"));
         return "redirect:/";
     }

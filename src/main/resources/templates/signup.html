@@ -14,10 +14,10 @@
 <body>
     <form action="#" method="post" th:action="@{/addPerson}" th:object="${user}" class="form-group row">
         <label path="email">Email</label>
-        <input type="text" th:field="*{email}" />
+        <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}" />
 
-        <label path="login">Login</label>
-        <input type="text" th:field="*{login}" />
+        <label path="username">Login</label>
+        <input type="text" th:field="*{getUsername}" />
 
         <label path="password">Password</label>
         <input type="password" th:field="*{password}" />

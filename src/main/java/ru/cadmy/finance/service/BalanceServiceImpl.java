@@ -23,13 +23,16 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
     @Transactional
     public List<BalanceRecord> balanceRecordList(User user)
     {
-        CriteriaQuery<BalanceRecord> criteriaQuery = em.getCriteriaBuilder().createQuery(BalanceRecord.class);
-        Root<BalanceRecord> balanceRequest = criteriaQuery.from(BalanceRecord.class);
-        Expression<String> exp = balanceRequest.get("user");
-        Predicate predicate = exp.in(user);
-
-        criteriaQuery.where(predicate);
-        return em.createQuery(criteriaQuery).getResultList();
+        if (user.getState() != State.NEW){
+            CriteriaQuery<BalanceRecord> criteriaQuery = em.getCriteriaBuilder().createQuery(BalanceRecord.class);
+            Root<BalanceRecord> balanceRequest = criteriaQuery.from(BalanceRecord.class);
+            Expression<String> exp = balanceRequest.get("user");
+            Predicate predicate = exp.in(user);
+            criteriaQuery.where(predicate);
+            return em.createQuery(criteriaQuery).getResultList();
+        } else {
+            return null;
+        }
     }
 
     @Override

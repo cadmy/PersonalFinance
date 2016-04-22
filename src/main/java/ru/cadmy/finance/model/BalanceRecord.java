@@ -1,20 +1,14 @@
 package ru.cadmy.finance.model;
 
 import lombok.Data;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-import javax.persistence.Column;
+import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,13 +22,13 @@ public @Data class BalanceRecord {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
     private User user;
 
     @Column(name="date")
-    @DateTimeFormat
     @Type(type="date")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date date;
 
     @Enumerated(EnumType.STRING)
