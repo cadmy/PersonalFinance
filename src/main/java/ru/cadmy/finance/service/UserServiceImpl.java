@@ -20,9 +20,7 @@ import ru.cadmy.finance.model.State;
  */
 
 @Service("userServiceImpl")
-public class UserServiceImpl extends ModelService implements UserService, UserDetailsService
-{
-    private Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+public class UserServiceImpl extends ModelService implements UserService, UserDetailsService {
 
     @Override
     @Transactional
@@ -48,16 +46,15 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
     }
 
     @Override
-    @Transactional(readOnly=true)
-    public User getCurrentUser()
-    {
+    @Transactional(readOnly = true)
+    public User getCurrentUser() {
         return getUserByUsername(getCurrentUsername());
     }
 
     @Override
-    @Transactional(readOnly=true)
-    public String getCurrentUsername()
-    {
+    @Transactional(readOnly = true)
+    public String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             return authentication.getName();
         } else {
@@ -66,9 +63,8 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
     }
 
     @Override
-    @Transactional(readOnly=true)
-    public User getUserById(Integer userId)
-    {
+    @Transactional(readOnly = true)
+    public User getUserById(Integer userId) {
         CriteriaQuery<User> criteriaQuery = em.getCriteriaBuilder().createQuery(User.class);
         Root<User> userRequest = criteriaQuery.from(User.class);
 
@@ -80,8 +76,7 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
     }
 
     @Override
-    public User getUserByUsername(String username)
-    {
+    public User getUserByUsername(String username) {
         CriteriaQuery<User> criteriaQuery = em.getCriteriaBuilder().createQuery(User.class);
         Root<User> userRequest = criteriaQuery.from(User.class);
 
@@ -97,20 +92,19 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
     }
 
     @Override
-    @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
-    {
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = getUserByUsername(username);
-        if(user.getUsername() == null){
+        if (user.getUsername() == null) {
             throw new UsernameNotFoundException("Username not found");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                user.getState().equals(State.NEW), true, true, true, getGrantedAuthorities(user));
+                user.getState().equals(State.ACTIVE), true, true, true, getGrantedAuthorities(user));
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(User user){
+    private List<GrantedAuthority> getGrantedAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_"+ user.getRole()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
         return authorities;
     }
 }

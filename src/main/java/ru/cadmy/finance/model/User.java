@@ -29,7 +29,7 @@ public @Data class User
 
     @Enumerated(EnumType.STRING)
     @Column(name="state", nullable=false)
-    private State state = State.NEW;
+    private State state;
 
     @Enumerated(EnumType.STRING)
     @Column(name="role", nullable=false)

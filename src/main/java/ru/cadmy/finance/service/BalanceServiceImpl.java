@@ -23,7 +23,7 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
     @Transactional
     public List<BalanceRecord> balanceRecordList(User user)
     {
-        if (user.getState() != State.NEW){
+        if (user != null && user.getState() != null && user.getState().equals(State.ACTIVE)){
             CriteriaQuery<BalanceRecord> criteriaQuery = em.getCriteriaBuilder().createQuery(BalanceRecord.class);
             Root<BalanceRecord> balanceRequest = criteriaQuery.from(BalanceRecord.class);
             Expression<String> exp = balanceRequest.get("user");
