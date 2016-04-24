@@ -46,8 +46,10 @@ public class MyController {
         return "signup";
     }
 
-    @RequestMapping(value = "/addPerson", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_person", method = RequestMethod.POST)
     public String addPerson(@ModelAttribute("user") User user, BindingResult result) {
+        user.setRole(Role.USER);
+        user.setState(State.ACTIVE);
         userService.addUser(user);
         logger.info(String.join(" was created"));
         return "redirect:/";
