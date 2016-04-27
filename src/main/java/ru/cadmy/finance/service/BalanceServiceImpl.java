@@ -2,9 +2,11 @@ package ru.cadmy.finance.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import ru.cadmy.finance.model.*;
 
 import javax.persistence.criteria.*;
+
 import java.util.List;
 
 /**
@@ -21,9 +23,8 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
 
     @Override
     @Transactional
-    public List<BalanceRecord> balanceRecordList(User user)
-    {
-        if (user != null && user.getState() != null && user.getState().equals(State.ACTIVE)){
+    public List<BalanceRecord> balanceRecordList(User user) {
+        if (user != null && user.getState() != null && user.getState().equals(State.ACTIVE)) {
             CriteriaQuery<BalanceRecord> criteriaQuery = em.getCriteriaBuilder().createQuery(BalanceRecord.class);
             Root<BalanceRecord> balanceRequest = criteriaQuery.from(BalanceRecord.class);
             Expression<String> exp = balanceRequest.get("user");
@@ -37,8 +38,8 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
 
     @Override
     @Transactional
-    public void removeBalanceRecord(Integer id) {
-        BalanceRecord balanceRecord = em.find(BalanceRecord.class, id);
+    public void removeBalanceRecord(Integer balanceRecordId) {
+        BalanceRecord balanceRecord = em.find(BalanceRecord.class, balanceRecordId);
         if (balanceRecord != null) {
             em.remove(balanceRecord);
         }

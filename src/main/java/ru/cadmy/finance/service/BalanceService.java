@@ -9,7 +9,9 @@ import ru.cadmy.finance.model.User;
  * Created by Cadmy on 22.03.2016.
  */
 public interface BalanceService {
-    public void addBalanceRecord(BalanceRecord balanceRecord);
-    public List<?> balanceRecordList(User user);
-    public void removeBalanceRecord(Integer id);
+    void addBalanceRecord(BalanceRecord balanceRecord);
+
+    List<BalanceRecord> balanceRecordList(User user);
+
+    void removeBalanceRecord(Integer balanceRecordId);
 }

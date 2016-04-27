@@ -1,9 +1,6 @@
 package ru.cadmy.finance.model;
 
-import javax.persistence.Enumerated;
-
-public enum State
-{
+public enum State {
     NEW,
     ACTIVE,
     INACTIVE,

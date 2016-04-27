@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
 import ru.cadmy.finance.service.UserService;
 
 @Configuration
@@ -30,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/signup" , "/add_person").permitAll()
+                .antMatchers("/", "/home", "/signup", "/add_person").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

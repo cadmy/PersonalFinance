@@ -1,13 +1,13 @@
 package ru.cadmy.finance.model;
 
 import lombok.Data;
+
 import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,19 +16,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "BALANCE")
-public @Data class BalanceRecord {
+public
+@Data
+class BalanceRecord {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user")
     private User user;
 
-    @Column(name="date")
+    @Column(name = "date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Type(type="date")
+    @Type(type = "date")
     private Date date;
 
     @Enumerated(EnumType.STRING)

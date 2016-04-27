@@ -6,10 +6,11 @@ import lombok.Data;
 
 @Entity
 @Table(name = "USER")
-public @Data class User
-{
+public
+@Data
+class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "email", unique = true, nullable = false, length = 500)
@@ -28,11 +29,11 @@ public @Data class User
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="state", nullable=false)
+    @Column(name = "state", nullable = false)
     private State state;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="role", nullable=false)
+    @Column(name = "role", nullable = false)
     private Role role;
 
 }
