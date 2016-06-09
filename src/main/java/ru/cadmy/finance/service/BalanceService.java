@@ -1,9 +1,8 @@
 package ru.cadmy.finance.service;
 
-import java.util.List;
+import ru.cadmy.finance.model.*;
 
-import ru.cadmy.finance.model.BalanceRecord;
-import ru.cadmy.finance.model.User;
+import java.util.*;
 
 /**
  * Created by Cadmy on 22.03.2016.
@@ -11,7 +10,24 @@ import ru.cadmy.finance.model.User;
 public interface BalanceService {
     void addBalanceRecord(BalanceRecord balanceRecord);
 
+    List<BalanceRecord> balanceRecordList();
+
     List<BalanceRecord> balanceRecordList(User user);
 
-    void removeBalanceRecord(Integer balanceRecordId);
+    List<BalanceRecord> balanceRecordList(Date date);
+
+    List<BalanceRecord> balanceRecordList(User user, Date date);
+
+    List<BalanceRecord> balanceRecordList(User user, Date dateFrom, Date dateTo);
+
+    List<BalanceRecord> balanceRecordList(User user, String category);
+
+    List<BalanceRecord> balanceRecordList(User user, Date date, String category);
+
+    List<BalanceRecord> balanceRecordList(User user, Date dateFrom, Date dateTo, String category);
+
+    BalanceRecord getBalanceRecordById(Long id);
+
+    void removeBalanceRecord(Long balanceRecordId);
 }
+

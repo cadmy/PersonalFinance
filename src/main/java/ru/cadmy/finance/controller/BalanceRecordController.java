@@ -21,7 +21,7 @@ import ru.cadmy.finance.service.UserService;
 @Controller
 public class BalanceRecordController {
 
-    final static Logger logger = Logger.getLogger(PersonalFinanceSystemController.class);
+    final static Logger logger = Logger.getLogger(ErrorController.class);
 
     @Autowired
     private UserService userService;
@@ -47,7 +47,7 @@ public class BalanceRecordController {
     }
 
     @RequestMapping(value = "/delete/{balanceRecordId}", method = RequestMethod.POST)
-    public String deleteBalanceRecord(@PathVariable("balanceRecordId") Integer balanceRecordId) {
+    public String deleteBalanceRecord(@PathVariable("balanceRecordId") Long balanceRecordId) {
         balanceService.removeBalanceRecord(balanceRecordId);
         logger.info("Balance record #".join(balanceRecordId.toString()).join(" was deleted"));
         return "redirect:/";

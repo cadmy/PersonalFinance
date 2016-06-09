@@ -21,7 +21,7 @@ import ru.cadmy.finance.service.UserService;
 @Controller
 public class UserController {
 
-    final static Logger logger = Logger.getLogger(PersonalFinanceSystemController.class);
+    final static Logger logger = Logger.getLogger(ErrorController.class);
 
     @Autowired
     private UserService userService;

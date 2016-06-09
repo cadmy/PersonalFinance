@@ -22,7 +22,7 @@ class BalanceRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user")
@@ -45,4 +45,18 @@ class BalanceRecord {
 
     @Column(name = "title", nullable = true, length = 500)
     private String title;
+
+    public BalanceRecord(){
+
+    }
+
+    public BalanceRecord(User user, Date date, Sign sign, Integer value, String category, String title){
+        this.user = user;
+        this.date =date;
+        this.sign = sign;
+        this.value = value;
+        this.category = category;
+        this.title = title;
+    }
+
 }

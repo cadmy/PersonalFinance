@@ -7,6 +7,7 @@ import ru.cadmy.finance.model.*;
 
 import javax.persistence.criteria.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +20,11 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
     @Transactional
     public void addBalanceRecord(BalanceRecord balanceRecord) {
         em.persist(balanceRecord);
+    }
+
+    @Override
+    public List<BalanceRecord> balanceRecordList() {
+        return null;
     }
 
     @Override
@@ -37,8 +43,43 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
     }
 
     @Override
+    public List<BalanceRecord> balanceRecordList(Date date) {
+        return null;
+    }
+
+    @Override
+    public List<BalanceRecord> balanceRecordList(User user, Date date) {
+        return null;
+    }
+
+    @Override
+    public List<BalanceRecord> balanceRecordList(User user, Date dateFrom, Date dateTo) {
+        return null;
+    }
+
+    @Override
+    public List<BalanceRecord> balanceRecordList(User user, String category) {
+        return null;
+    }
+
+    @Override
+    public List<BalanceRecord> balanceRecordList(User user, Date date, String category) {
+        return null;
+    }
+
+    @Override
+    public List<BalanceRecord> balanceRecordList(User user, Date dateFrom, Date dateTo, String category) {
+        return null;
+    }
+
+    @Override
+    public BalanceRecord getBalanceRecordById(Long id) {
+        return null;
+    }
+
+    @Override
     @Transactional
-    public void removeBalanceRecord(Integer balanceRecordId) {
+    public void removeBalanceRecord(Long balanceRecordId) {
         BalanceRecord balanceRecord = em.find(BalanceRecord.class, balanceRecordId);
         if (balanceRecord != null) {
             em.remove(balanceRecord);

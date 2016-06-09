@@ -38,7 +38,7 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
 
     @Override
     @Transactional
-    public void removeUser(Integer id) {
+    public void removeUser(Long id) {
         User user = em.find(User.class, id);
         if (user != null) {
             em.remove(user);
@@ -64,7 +64,7 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
 
     @Override
     @Transactional(readOnly = true)
-    public User getUserById(Integer userId) {
+    public User getUserById(Long userId) {
         CriteriaQuery<User> criteriaQuery = em.getCriteriaBuilder().createQuery(User.class);
         Root<User> userRequest = criteriaQuery.from(User.class);
 

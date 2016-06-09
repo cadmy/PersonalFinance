@@ -18,7 +18,7 @@ import javax.persistence.EntityManagerFactory;
  * Created by Cadmy on 11.03.2016.
  */
 @Configuration
-@ComponentScan("ru.cadmy.finance.model")
+@ComponentScan("ru.cadmy.finance.configuration")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
 

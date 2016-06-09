@@ -14,13 +14,13 @@ public interface UserService {
 
     public List<User> getUserList();
 
-    public void removeUser(Integer id);
+    public void removeUser(Long id);
 
     public User getCurrentUser();
 
     public String getCurrentUsername();
 
-    public User getUserById(Integer userId);
+    public User getUserById(Long userId);
 
     public User getUserByUsername(String username);
 }
