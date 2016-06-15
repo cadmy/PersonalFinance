@@ -38,7 +38,7 @@ public class UserController {
         user.setRole(Role.USER);
         user.setState(State.ACTIVE);
         userService.addUser(user);
-        logger.info("User ".join(user.getUsername().toString()).join(" was created"));
+        logger.info("User " + user.getUsername() + " was created");
         return "redirect:/";
     }
 }

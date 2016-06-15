@@ -36,4 +36,19 @@ class User {
     @Column(name = "role", nullable = false)
     private Role role;
 
+    public User(String email, String firstName, String lastName, String password,
+                Role role, State state, String username) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.role = role;
+        this.state = state;
+        this.username = username;
+    }
+
+    public User() {
+
+    }
+
 }

@@ -15,6 +15,7 @@ import ru.cadmy.finance.model.BalanceRecord;
 import ru.cadmy.finance.service.BalanceService;
 import ru.cadmy.finance.service.UserService;
 
+
 /**
  * Created by Cadmy on 27.04.2016.
  */
@@ -42,14 +43,14 @@ public class BalanceRecordController {
     public String addBalanceRecord(@ModelAttribute("balanceRecord") BalanceRecord balanceRecord, BindingResult result) {
         balanceRecord.setUser(userService.getCurrentUser());
         balanceService.addBalanceRecord(balanceRecord);
-        logger.info("BalanceRecord #".join(balanceRecord.getId().toString()).join(" was created"));
+        logger.info("BalanceRecord #" + balanceRecord.getId().toString() + " was created");
         return "redirect:/";
     }
 
     @RequestMapping(value = "/delete/{balanceRecordId}", method = RequestMethod.POST)
     public String deleteBalanceRecord(@PathVariable("balanceRecordId") Long balanceRecordId) {
         balanceService.removeBalanceRecord(balanceRecordId);
-        logger.info("Balance record #".join(balanceRecordId.toString()).join(" was deleted"));
+        logger.info("Balance record #" + balanceRecordId.toString() + " was deleted");
         return "redirect:/";
     }
 }

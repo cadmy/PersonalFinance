@@ -74,7 +74,7 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
 
     @Override
     public BalanceRecord getBalanceRecordById(Long id) {
-        return null;
+        return em.find(BalanceRecord.class, id);
     }
 
     @Override
