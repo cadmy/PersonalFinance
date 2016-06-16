@@ -4,23 +4,25 @@ package ru.cadmy.finance.service;
  * Created by Cadmy on 10.03.2016.
  */
 
-import java.util.List;
-
 import ru.cadmy.finance.model.User;
+
+import java.util.List;
 
 public interface UserService {
 
-    public void addUser(User user);
+    boolean addUser(User user);
 
-    public List<User> getUserList();
+    List<User> getUserList();
 
-    public void removeUser(Long id);
+    void removeUser(Long id);
 
-    public User getCurrentUser();
+    User getCurrentUser();
 
-    public String getCurrentUsername();
+    String getCurrentUsername();
 
-    public User getUserById(Long userId);
+    User getUserById(Long userId);
 
-    public User getUserByUsername(String username);
+    User getUserByUsername(String username);
+
+    boolean doesUsernameExist(String username);
 }

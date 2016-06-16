@@ -22,9 +22,14 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
 
     @Override
     @Transactional
-    public void addUser(User user) {
-        if (getUserByUsername(user.getUsername()) == null){
+    public boolean addUser(User user) {
+        if (!doesUsernameExist(user.getUsername())){
             em.persist(user);
+            return true;
+        }
+        else
+        {
+           return false;
         }
     }
 
@@ -88,6 +93,22 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
             return em.createQuery(criteriaQuery).getSingleResult();
         } catch (NoResultException e) {
             return new User();
+        }
+    }
+
+    @Override
+    public boolean doesUsernameExist(String username) {
+        CriteriaQuery<User> criteriaQuery = em.getCriteriaBuilder().createQuery(User.class);
+        Root<User> userRequest = criteriaQuery.from(User.class);
+
+        Expression<String> exp = userRequest.get("username");
+        Predicate predicate = exp.in(username);
+
+        criteriaQuery.where(predicate);
+        try {
+            return em.createQuery(criteriaQuery).getSingleResult() != null;
+        } catch (NoResultException e) {
+            return false;
         }
     }
 

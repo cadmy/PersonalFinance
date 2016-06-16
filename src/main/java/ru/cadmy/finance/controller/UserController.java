@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.cadmy.finance.model.*;
 import ru.cadmy.finance.service.UserService;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -29,11 +30,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/add_person", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("user") User user, BindingResult result) {
+    public String addPerson(@Valid @ModelAttribute("user") User user, BindingResult result) {
         user.setRole(Role.USER);
         user.setState(State.ACTIVE);
-        userService.addUser(user);
-        logger.info("User ".join(user.getUsername()).join(" was created"));
-        return "redirect:/";
+        if (userService.addUser(user))
+        {
+            logger.info("User ".join(user.getUsername()).join(" was created"));
+            return "redirect:/";
+        }
+        else
+        {
+            logger.info("User ".join(user.getUsername()).join(" already exists"));
+
+            return "signup :: failure-details";
+        }
     }
 }
