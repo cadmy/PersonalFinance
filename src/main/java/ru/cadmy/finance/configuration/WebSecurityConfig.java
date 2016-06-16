@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.cadmy.finance.service.UserService;
 
 @Configuration
@@ -23,9 +24,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userServiceImpl")
     UserDetailsService userDetailsService;
 
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     @Override

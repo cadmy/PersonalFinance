@@ -4,6 +4,7 @@ import org.springframework.security.core.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.cadmy.finance.model.*;
@@ -20,10 +21,13 @@ import java.util.*;
 @Service("userServiceImpl")
 public class UserServiceImpl extends ModelService implements UserService, UserDetailsService {
 
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     @Transactional
     public boolean addUser(User user) {
         if (!doesUsernameExist(user.getUsername())){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             em.persist(user);
             return true;
         }
