@@ -4,16 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import ru.cadmy.finance.model.*;
+import ru.cadmy.finance.service.UserService;
 
 import java.util.Map;
-
-import ru.cadmy.finance.model.Role;
-import ru.cadmy.finance.model.State;
-import ru.cadmy.finance.model.User;
-import ru.cadmy.finance.service.UserService;
 
 /**
  * Created by Cadmy on 27.04.2016.
@@ -21,7 +16,7 @@ import ru.cadmy.finance.service.UserService;
 @Controller
 public class UserController {
 
-    final static Logger logger = Logger.getLogger(ErrorController.class);
+    final static Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;

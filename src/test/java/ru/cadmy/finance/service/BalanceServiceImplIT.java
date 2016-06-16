@@ -4,20 +4,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import ru.cadmy.finance.configuration.ApplicationContextConfig;
+import ru.cadmy.finance.model.*;
 
 import java.sql.Date;
 
-import ru.cadmy.finance.configuration.ApplicationContextConfig;
-import ru.cadmy.finance.model.BalanceRecord;
-import ru.cadmy.finance.model.Role;
-import ru.cadmy.finance.model.Sign;
-import ru.cadmy.finance.model.State;
-import ru.cadmy.finance.model.User;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -27,6 +21,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration(classes = ApplicationContextConfig.class)
 @ActiveProfiles("dev")
 public class BalanceServiceImplIT {
+
     @Autowired
     BalanceService balanceService;
 

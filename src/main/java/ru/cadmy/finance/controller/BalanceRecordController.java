@@ -4,16 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import ru.cadmy.finance.model.BalanceRecord;
+import ru.cadmy.finance.service.*;
 
 import java.util.Map;
-
-import ru.cadmy.finance.model.BalanceRecord;
-import ru.cadmy.finance.service.BalanceService;
-import ru.cadmy.finance.service.UserService;
 
 
 /**
@@ -22,7 +17,7 @@ import ru.cadmy.finance.service.UserService;
 @Controller
 public class BalanceRecordController {
 
-    final static Logger logger = Logger.getLogger(ErrorController.class);
+    final static Logger logger = Logger.getLogger(BalanceRecordController.class);
 
     @Autowired
     private UserService userService;

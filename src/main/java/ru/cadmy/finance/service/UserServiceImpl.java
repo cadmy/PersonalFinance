@@ -6,14 +6,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.*;
+import ru.cadmy.finance.model.*;
+import ru.cadmy.finance.model.User;
 
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.*;
-
-import ru.cadmy.finance.model.User;
-import ru.cadmy.finance.model.State;
+import java.util.*;
 
 /**
  * Created by Cadmy on 10.03.2016.
@@ -25,7 +23,9 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
     @Override
     @Transactional
     public void addUser(User user) {
-        em.persist(user);
+        if (getUserByUsername(user.getUsername()) == null){
+            em.persist(user);
+        }
     }
 
     @Override
