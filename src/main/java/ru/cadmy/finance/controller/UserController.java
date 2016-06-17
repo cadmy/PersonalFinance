@@ -17,15 +17,28 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-    final static Logger logger = Logger.getLogger(UserController.class);
+
+    private final static Logger logger = Logger.getLogger(UserController.class);
+    public static final String HIDDEN_STYLE = "hidden";
+    public static final String ALERT_SUCCESS_STYLE = "alert alert-success";
+    public static final String ALERT_DANGER_STYLE = "alert alert-danger";
+    private String systemMessage = "";
+    private String messageStyle = HIDDEN_STYLE;
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    BalanceRecordController balanceRecordController;
+
     @RequestMapping("/signup")
     public String signup(Map<String, Object> map) {
-        map.put("user", new User());
+        map.put("user", userService.getCurrentUser());
         map.put("userList", userService.getUserList());
+        map.put("messageStyle", messageStyle);
+        map.put("systemMessage", systemMessage);
+        map.put(messageStyle, HIDDEN_STYLE);
+        clearSystemMessage();
         return "signup";
     }
 
@@ -36,13 +49,20 @@ public class UserController {
         if (userService.addUser(user))
         {
             logger.info("User ".join(user.getUsername()).join(" was created"));
+            balanceRecordController.getSystemMessage("User was successfully created", ALERT_SUCCESS_STYLE);
             return "redirect:/";
         }
         else
         {
             logger.info("User ".join(user.getUsername()).join(" already exists"));
-
-            return "signup :: failure-details";
+            messageStyle = ALERT_DANGER_STYLE;
+            systemMessage =  "Username already exists";
+            return "redirect:/signup";
         }
+    }
+
+    private void clearSystemMessage() {
+        messageStyle = HIDDEN_STYLE;
+        systemMessage = "";
     }
 }

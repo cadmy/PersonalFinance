@@ -10,6 +10,8 @@ import ru.cadmy.finance.service.*;
 
 import java.util.Map;
 
+import static ru.cadmy.finance.controller.UserController.HIDDEN_STYLE;
+
 
 /**
  * Created by Cadmy on 27.04.2016.
@@ -17,7 +19,9 @@ import java.util.Map;
 @Controller
 public class BalanceRecordController {
 
-    final static Logger logger = Logger.getLogger(BalanceRecordController.class);
+    private final static Logger logger = Logger.getLogger(BalanceRecordController.class);
+    private String systemMessage = "";
+    private String messageStyle = HIDDEN_STYLE;
 
     @Autowired
     private UserService userService;
@@ -30,7 +34,9 @@ public class BalanceRecordController {
     public String index(Map<String, Object> map) {
         map.put("balanceRecord", new BalanceRecord());
         map.put("balanceRecordList", balanceService.balanceRecordList(userService.getCurrentUser()));
-
+        map.put("messageStyle", messageStyle);
+        map.put("systemMessage", systemMessage);
+        clearSystemMessage();
         return "index";
     }
 
@@ -47,5 +53,15 @@ public class BalanceRecordController {
         balanceService.removeBalanceRecord(balanceRecordId);
         logger.info("Balance record #".join(balanceRecordId.toString()).join(" was deleted"));
         return "redirect:/";
+    }
+
+    public void getSystemMessage(String message, String style){
+        messageStyle = style;
+        systemMessage = message;
+    }
+
+    private void clearSystemMessage() {
+        messageStyle = HIDDEN_STYLE;
+        systemMessage = "";
     }
 }

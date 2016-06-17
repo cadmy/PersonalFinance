@@ -12,7 +12,7 @@
     </link>
 </head>
 <body onload="prettyPrint();">
-    <div class="container">
+    <div class="container" sec:authorize="isAnonymous()">
         <form action="#" method="post" th:action="@{/add_person}" th:object="${user}" class="form-vertical">
             <div class="form-group row">
                 <label path="email">Email</label>
@@ -40,12 +40,21 @@
             </div>
 
             <input type="submit" value="Add Person" class="btn btn-primary btn-large" />
-            <a href="/" class="btn">Back</a>
         </form>
-        <div th:fragment="failure-details" xmlns:th="http://www.thymeleaf.org" th:remove="tag">
-            <p>Username already exists</p>
+
+        <div th:class="${messageStyle}">
+            <p th:text="${systemMessage}" />
         </div>
     </div>
+
+    <div sec:authorize="isAuthenticated()" class="container">
+        <p th:text="'Welcome, ' + ${user.username}"></p>
+    </div>
+
+    <div class="container">
+        <a href="/" class="btn">Back</a>
+    </div>
+
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>

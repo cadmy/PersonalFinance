@@ -47,6 +47,12 @@
     </div>
 </nav>
 
+<div class="container">
+    <div th:class="${messageStyle}">
+        <p th:text="${systemMessage}" />
+    </div>
+</div>
+
 <div class="container" sec:authorize="isAnonymous()">
     <div class="row">
         <div class="span12">
