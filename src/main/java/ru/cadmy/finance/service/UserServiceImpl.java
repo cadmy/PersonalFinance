@@ -21,7 +21,7 @@ import java.util.*;
 @Service("userServiceImpl")
 public class UserServiceImpl extends ModelService implements UserService, UserDetailsService {
 
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     @Transactional

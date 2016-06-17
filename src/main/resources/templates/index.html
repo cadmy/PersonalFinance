@@ -127,8 +127,8 @@
                             <tr>
                                 <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
                                     <td><input type="date" th:field="*{date}" /></td>
-                                    <td><input type="text" th:field="*{category}" /></td>
-                                    <td><input type="text" th:field="*{title}" /></td>
+                                    <td><input type="text" th:field="*{category}" maxlength="500"/></td>
+                                    <td><input type="text" th:field="*{title}" maxlength="500"/></td>
                                     <td>
                                         <select th:field="*{sign}">
                                             <option value="COST">COST</option>
