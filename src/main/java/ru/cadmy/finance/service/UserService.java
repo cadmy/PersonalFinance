@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface UserService {
 
-    boolean addUser(User user);
+    UserAdditionResults addUser(User user);
 
     List<User> getUserList();
 

@@ -25,15 +25,15 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
 
     @Override
     @Transactional
-    public boolean addUser(User user) {
-        if (!doesUsernameExist(user.getUsername())){
+    public UserAdditionResults addUser(User user) {
+        if ( doesUsernameExist(user.getUsername()) ) {
+            return UserAdditionResults.USERNAME_EXISTS;
+        } else if ( doesEmailExist(user.getEmail()) ) {
+            return UserAdditionResults.EMAIL_EXISTS;
+        } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             em.persist(user);
-            return true;
-        }
-        else
-        {
-           return false;
+            return UserAdditionResults.SUCCESS;
         }
     }
 
@@ -107,6 +107,21 @@ public class UserServiceImpl extends ModelService implements UserService, UserDe
 
         Expression<String> exp = userRequest.get("username");
         Predicate predicate = exp.in(username);
+
+        criteriaQuery.where(predicate);
+        try {
+            return em.createQuery(criteriaQuery).getSingleResult() != null;
+        } catch (NoResultException e) {
+            return false;
+        }
+    }
+
+    private boolean doesEmailExist(String email) {
+        CriteriaQuery<User> criteriaQuery = em.getCriteriaBuilder().createQuery(User.class);
+        Root<User> userRequest = criteriaQuery.from(User.class);
+
+        Expression<String> exp = userRequest.get("email");
+        Predicate predicate = exp.in(email);
 
         criteriaQuery.where(predicate);
         try {

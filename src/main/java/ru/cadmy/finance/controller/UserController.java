@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.cadmy.finance.model.*;
-import ru.cadmy.finance.service.UserService;
+import ru.cadmy.finance.service.*;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -46,18 +46,27 @@ public class UserController {
     public String addPerson(@Valid @ModelAttribute("user") User user, BindingResult result) {
         user.setRole(Role.USER);
         user.setState(State.ACTIVE);
-        if (userService.addUser(user))
-        {
-            logger.info("User ".join(user.getUsername()).join(" was created"));
-            balanceRecordController.getSystemMessage("User was successfully created", ALERT_SUCCESS_STYLE);
-            return "redirect:/";
-        }
-        else
-        {
-            logger.info("User ".join(user.getUsername()).join(" already exists"));
-            messageStyle = ALERT_DANGER_STYLE;
-            systemMessage =  "Username already exists";
-            return "redirect:/signup";
+        UserAdditionResults additionResult = userService.addUser(user);
+        switch (additionResult) {
+            case SUCCESS:
+                logger.info("User ".join(user.getUsername()).join(" was created"));
+                balanceRecordController.getSystemMessage("User was successfully created", ALERT_SUCCESS_STYLE);
+                return "redirect:/";
+            case USERNAME_EXISTS:
+                logger.info("Username ".join(user.getUsername()).join(" already exists"));
+                messageStyle = ALERT_DANGER_STYLE;
+                systemMessage = "Username already exists";
+                return "redirect:/signup";
+            case EMAIL_EXISTS:
+                logger.info("Email ".join(user.getEmail()).join(" already exists"));
+                messageStyle = ALERT_DANGER_STYLE;
+                systemMessage = "Email already exists";
+                return "redirect:/signup";
+            default:
+                logger.info("Something strange in your neighbourhood \nWhile user creation");
+                messageStyle = ALERT_DANGER_STYLE;
+                systemMessage = "Something has gone wrong";
+                return "redirect:/signup";
         }
     }
 
