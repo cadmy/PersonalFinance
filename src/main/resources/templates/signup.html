@@ -4,11 +4,9 @@
     <title>Sign up page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     </link>
-    <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+    <link th:href="@{/css/jumbotron.css}" rel="stylesheet">
     </link>
 </head>
 <body onload="prettyPrint();">
@@ -55,10 +53,8 @@
         <a href="/" class="btn">Back</a>
     </div>
 
-<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
-
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/prettify.min.js}"></script>
 <script th:src="@{/js/jquery-3.0.0.min.js}"></script>
 <script th:src="@{/js/parsley.min.js}"></script>
 
