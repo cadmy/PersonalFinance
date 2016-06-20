@@ -14,27 +14,27 @@
         <form id="form" action="#" method="post" th:action="@{/add_person}" th:object="${user}" class="form-vertical">
             <div class="form-group row">
                 <label path="email">Email</label>
-                <input data-parsley-maxlength="500" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}" />
+                <input required = "true" data-parsley-maxlength="500" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}" />
             </div>
 
             <div class="form-group row">
                 <label path="username">Login</label>
-                <input data-parsley-maxlength="500" type="text" th:field="*{username}"/>
+                <input required = "true" data-parsley-maxlength="500" type="text" th:field="*{username}" />
             </div>
 
             <div class="form-group row">
                 <label path="password">Password</label>
-                <input data-parsley-maxlength="500" type="password" th:field="*{password}" />
+                <input required = "true" data-parsley-maxlength="500" type="password" th:field="*{password}" />
             </div>
 
             <div class="form-group row">
                 <label path="firstName">First Name</label>
-                <input data-parsley-maxlength="500" type="text" th:field="*{firstName}" />
+                <input required = "true" data-parsley-maxlength="500" type="text" th:field="*{firstName}" />
             </div>
 
             <div class="form-group row">
                 <label path="lastName">Last Name</label>
-                <input data-parsley-maxlength="500" type="text" th:field="*{lastName}" />
+                <input required = "true" data-parsley-maxlength="500" type="text" th:field="*{lastName}" />
             </div>
 
             <input type="submit" value="Add Person" class="btn btn-primary btn-large" />

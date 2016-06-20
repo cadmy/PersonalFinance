@@ -4,11 +4,9 @@
     <title>Error page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     </link>
-    <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+    <link th:href="@{/css/jumbotron.css}" rel="stylesheet">
     </link>
 </head>
 <body>
@@ -18,4 +16,7 @@
         <a href="/" class="btn">Back</a>
     </div>
 </body>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/prettify.min.js}"></script>
+<script th:src="@{/js/jquery-3.0.0.min.js}"></script>
 </html>
