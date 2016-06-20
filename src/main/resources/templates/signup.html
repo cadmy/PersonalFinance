@@ -13,30 +13,30 @@
 </head>
 <body onload="prettyPrint();">
     <div class="container" sec:authorize="isAnonymous()">
-        <form action="#" method="post" th:action="@{/add_person}" th:object="${user}" class="form-vertical">
+        <form id="form" action="#" method="post" th:action="@{/add_person}" th:object="${user}" class="form-vertical">
             <div class="form-group row">
                 <label path="email">Email</label>
-                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}" />
+                <input data-parsley-maxlength="500" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}" />
             </div>
 
             <div class="form-group row">
                 <label path="username">Login</label>
-                <input type="text" th:field="*{username}" maxlength="500"/>
+                <input data-parsley-maxlength="500" type="text" th:field="*{username}"/>
             </div>
 
             <div class="form-group row">
                 <label path="password">Password</label>
-                <input type="password" th:field="*{password}" maxlength="500"/>
+                <input data-parsley-maxlength="500" type="password" th:field="*{password}" />
             </div>
 
             <div class="form-group row">
                 <label path="firstName">First Name</label>
-                <input type="text" th:field="*{firstName}" maxlength="500"/>
+                <input data-parsley-maxlength="500" type="text" th:field="*{firstName}" />
             </div>
 
             <div class="form-group row">
                 <label path="lastName">Last Name</label>
-                <input type="text" th:field="*{lastName}" maxlength="500"/>
+                <input data-parsley-maxlength="500" type="text" th:field="*{lastName}" />
             </div>
 
             <input type="submit" value="Add Person" class="btn btn-primary btn-large" />
@@ -58,5 +58,14 @@
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+
+<script th:src="@{/js/jquery-3.0.0.min.js}"></script>
+<script th:src="@{/js/parsley.min.js}"></script>
+
+<script type="text/javascript">
+    var formInstance = $('form').parsley();
+    console.log(field.options.maxlength);
+</script>
+
 </body>
 </html>
