@@ -8,6 +8,8 @@
     </link>
     <link th:href="@{/css/jumbotron.css}" rel="stylesheet">
     </link>
+    <link th:href="@{/css/site.css}" rel="stylesheet">
+    </link>
 </head>
 
 <body onload="prettyPrint();">
@@ -96,7 +98,7 @@
         <div class="row">
             <div class="span8 offset2">
                     <h3>Balance</h3>
-                    <table class="table table-bordered table-striped">
+                    <table id="balance_table" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -147,5 +149,11 @@
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/prettify.min.js}"></script>
 <script th:src="@{/js/jquery-3.0.0.min.js}"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#balance_table').DataTable();
+    } );
+</script>
 </body>
 </html>
