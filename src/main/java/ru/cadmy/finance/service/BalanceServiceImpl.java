@@ -24,7 +24,9 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
 
     @Override
     public List<BalanceRecord> balanceRecordList() {
-        return null;
+        CriteriaQuery<BalanceRecord> c = em.getCriteriaBuilder().createQuery(BalanceRecord.class);
+        c.from(BalanceRecord.class);
+        return em.createQuery(c).getResultList();
     }
 
     @Override

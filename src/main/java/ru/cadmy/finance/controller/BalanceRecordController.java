@@ -1,5 +1,6 @@
 package ru.cadmy.finance.controller;
 
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,7 @@ public class BalanceRecordController {
     public String index(Map<String, Object> map) {
         map.put("balanceRecord", new BalanceRecord());
         map.put("balanceRecordList", balanceService.balanceRecordList(userService.getCurrentUser()));
+        map.put("fullBalanceRecordList", balanceService.balanceRecordList());
         map.put("messageStyle", messageStyle);
         map.put("systemMessage", systemMessage);
         clearSystemMessage();
@@ -46,6 +48,11 @@ public class BalanceRecordController {
         balanceService.addBalanceRecord(balanceRecord);
         logger.info("BalanceRecord #".join(balanceRecord.getId().toString()).join(" was created"));
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/refresh", method = RequestMethod.POST)
+    public String refreshBalanceTable() {
+        return new Gson().toJson(balanceService.balanceRecordList());
     }
 
     @RequestMapping(value = "/delete/{balanceRecordId}", method = RequestMethod.POST)
