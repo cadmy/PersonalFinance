@@ -47,19 +47,22 @@ public class BalanceRecordController {
         balanceRecord.setUser(userService.getCurrentUser());
         balanceService.addBalanceRecord(balanceRecord);
         logger.info("BalanceRecord #".join(balanceRecord.getId().toString()).join(" was created"));
-        return "redirect:/";
+        return "redirect:/PersonalFinance/";
     }
 
-    @RequestMapping(value = "/refresh", method = RequestMethod.POST)
+    @RequestMapping(value = "/refresh", method = RequestMethod.GET)
     public String refreshBalanceTable() {
-        return new Gson().toJson(balanceService.balanceRecordList());
+
+        String jsonResult = new Gson().toJson(balanceService.balanceRecordList());
+        jsonResult = "{ \"data\":".join(jsonResult).join("}");
+        return jsonResult;
     }
 
     @RequestMapping(value = "/delete/{balanceRecordId}", method = RequestMethod.POST)
     public String deleteBalanceRecord(@PathVariable("balanceRecordId") Long balanceRecordId) {
         balanceService.removeBalanceRecord(balanceRecordId);
         logger.info("Balance record #".join(balanceRecordId.toString()).join(" was deleted"));
-        return "redirect:/";
+        return "redirect:/PersonalFinance/";
     }
 
     public void getSystemMessage(String message, String style){
