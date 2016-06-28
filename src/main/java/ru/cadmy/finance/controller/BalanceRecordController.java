@@ -1,6 +1,5 @@
 package ru.cadmy.finance.controller;
 
-import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,11 +30,10 @@ public class BalanceRecordController {
     private BalanceService balanceService;
 
 
-    @RequestMapping(value = {"/home", "/login", "/"})
+    @RequestMapping(value = {"/home", "/login", "/", "/PersonalFinance"})
     public String index(Map<String, Object> map) {
         map.put("balanceRecord", new BalanceRecord());
         map.put("balanceRecordList", balanceService.balanceRecordList(userService.getCurrentUser()));
-        map.put("fullBalanceRecordList", balanceService.balanceRecordList());
         map.put("messageStyle", messageStyle);
         map.put("systemMessage", systemMessage);
         clearSystemMessage();
@@ -50,12 +48,33 @@ public class BalanceRecordController {
         return "redirect:/PersonalFinance/";
     }
 
-    @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+    @RequestMapping(value = "/refresh", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
     public String refreshBalanceTable() {
-
-        String jsonResult = new Gson().toJson(balanceService.balanceRecordList());
-        jsonResult = "{ \"data\":".join(jsonResult).join("}");
-        return jsonResult;
+        if (!balanceService.balanceRecordList().isEmpty())
+        {
+            StringBuilder jsonResult =  new StringBuilder();
+            jsonResult.append("{ \"data\": [");
+            for (BalanceRecord balanceRecord : balanceService.balanceRecordList())
+            {
+                jsonResult.append("[");
+                jsonResult.append("\"");
+                jsonResult.append(balanceRecord.getDate().toString());
+                jsonResult.append("\" ,\"");
+                jsonResult.append(balanceRecord.getCategory());
+                jsonResult.append("\" ,\"");
+                jsonResult.append(balanceRecord.getTitle());
+                jsonResult.append("\" ,\"");
+                jsonResult.append(balanceRecord.getSign().toString());
+                jsonResult.append("\" ,");
+                jsonResult.append(balanceRecord.getValue().toString());
+                jsonResult.append("],");
+            }
+            jsonResult.deleteCharAt(jsonResult.length()-1);
+            jsonResult.append("]}");
+            return jsonResult.toString();
+        }
+        return "{}";
     }
 
     @RequestMapping(value = "/delete/{balanceRecordId}", method = RequestMethod.POST)

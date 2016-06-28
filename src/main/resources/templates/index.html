@@ -106,29 +106,31 @@
                         <h3>Balance</h3>
                         <table id="balance_table" class="table table-bordered table-striped">
                             <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Category</th>
-                                <th>Title</th>
-                                <th>Type</th>
-                                <th>Value</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                            <tr>
-                                <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
-                                    <td><input type="date" th:field="*{date}" /></td>
-                                    <td><input type="text" th:field="*{category}" maxlength="500"/></td>
-                                    <td><input type="text" th:field="*{title}" maxlength="500"/></td>
-                                    <td>
-                                        <select th:field="*{sign}">
-                                            <option value="COST">COST</option>
-                                            <option value="INCOME">INCOME</option>
-                                        </select>
-                                    </td>
-                                    <td><input type="number" th:field="*{value}" /></td>
-                                    <td><input type="submit" value="Add balance record" class="btn"/></td>
-                                </form>
-                            </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Category</th>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Value</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
+                                        <td><input type="date" th:field="*{date}" /></td>
+                                        <td><input type="text" th:field="*{category}" maxlength="500"/></td>
+                                        <td><input type="text" th:field="*{title}" maxlength="500"/></td>
+                                        <td>
+                                            <select th:field="*{sign}">
+                                                <option value="COST">COST</option>
+                                                <option value="INCOME">INCOME</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" th:field="*{value}" /></td>
+                                        <td><input type="submit" value="Add balance record" class="btn"/></td>
+                                    </form>
+                                </tr>
                             </thead>
                             <tbody>
                             <if th:if="${not #lists.isEmpty(balanceRecordList)}">
@@ -166,17 +168,6 @@
                                 <th>Value</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <if th:if="${not #lists.isEmpty(fullBalanceRecordList)}">
-                                <tr th:each="overallBalanceRecord : ${fullBalanceRecordList}">
-                                    <td type="text" th:text="${overallBalanceRecord.date != null} ? ${#calendars.format(overallBalanceRecord.date, 'dd.MM.yyyy')} : null"></td>
-                                    <td th:text="${overallBalanceRecord.category}"></td>
-                                    <td th:text="${overallBalanceRecord.title}"></td>
-                                    <td th:text="${overallBalanceRecord.sign}"></td>
-                                    <td type="number" th:text="${overallBalanceRecord.value}"></td>
-                                </tr>
-                            </if>
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -190,12 +181,21 @@
 <script type="text/javascript" charset="utf8" th:src="@{/js/jquery.dataTables.js}"></script>
 <script type="text/javascript">
     $(document).ready( function () {
-    $('#balance_table').DataTable();
+        $('#balance_table').DataTable();
     } );
 
-    $(document).ready( function () {
-        $('#full_balance_table').DataTable();
+    var table;
+    $(document).ready(function() {
+        table = $('#full_balance_table').DataTable( {
+            "ajax": '/refresh',
+            "sAjaxDataProp": "data"
+        } );
     } );
+
+    setInterval( function () {
+        table.ajax.reload();
+    }, 30000 );
+
 </script>
 </body>
 </html>
