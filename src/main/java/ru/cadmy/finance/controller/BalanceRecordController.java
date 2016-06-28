@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.cadmy.finance.model.BalanceRecord;
 import ru.cadmy.finance.service.*;
 
+import java.util.Date;
 import java.util.Map;
 
 import static ru.cadmy.finance.controller.UserController.HIDDEN_STYLE;
@@ -67,6 +68,10 @@ public class BalanceRecordController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addBalanceRecord(@ModelAttribute("balanceRecord") BalanceRecord balanceRecord, BindingResult result) {
         balanceRecord.setUser(userService.getCurrentUser());
+        if (balanceRecord.getDate() == null)
+        {
+            balanceRecord.setDate(new Date());
+        }
         balanceService.addBalanceRecord(balanceRecord);
         logger.info("BalanceRecord #".join(balanceRecord.getId().toString()).join(" was created"));
         return "redirect:/PersonalFinance/";
