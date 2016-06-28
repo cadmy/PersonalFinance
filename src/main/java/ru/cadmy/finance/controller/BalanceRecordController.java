@@ -74,10 +74,10 @@ public class BalanceRecordController {
         }
         balanceService.addBalanceRecord(balanceRecord);
         logger.info("BalanceRecord #".join(balanceRecord.getId().toString()).join(" was created"));
-        return "redirect:/PersonalFinance/";
+        return "redirect:/";
     }
 
-    @RequestMapping(value = "/refresh", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = {"/refresh", "/PersonalFinance/refresh"}, method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String refreshBalanceTable() {
         if (!balanceService.balanceRecordList().isEmpty())
