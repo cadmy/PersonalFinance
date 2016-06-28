@@ -59,6 +59,8 @@ public class BalanceRecordController {
             {
                 jsonResult.append("[");
                 jsonResult.append("\"");
+                jsonResult.append(balanceRecord.getUser().getUsername().toString());
+                jsonResult.append("\" ,\"");
                 jsonResult.append(balanceRecord.getDate().toString());
                 jsonResult.append("\" ,\"");
                 jsonResult.append(balanceRecord.getCategory());
