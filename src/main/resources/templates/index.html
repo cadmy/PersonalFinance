@@ -117,17 +117,17 @@
                             </thead>
                             <thead>
                                 <tr>
-                                    <form action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
-                                        <td><input type="date" th:field="*{date}" /></td>
-                                        <td><input type="text" th:field="*{category}" maxlength="500"/></td>
-                                        <td><input type="text" th:field="*{title}" maxlength="500"/></td>
+                                    <form id="balance_record_add_form" action="#" method="post" th:action="@{/add}" th:object="${balanceRecord}" class="form-vertical">
+                                        <td><input type="date" required = "true" th:field="*{date}" placeholder="YYYY-MM-DD" data-date-format="YYYY-MM-DD" /></td>
+                                        <td><input type="text" data-parsley-maxlength="500" th:field="*{category}" /></td>
+                                        <td><input type="text" required = "true" data-parsley-maxlength="500" th:field="*{title}" /></td>
                                         <td>
                                             <select th:field="*{sign}">
                                                 <option value="COST">COST</option>
                                                 <option value="INCOME">INCOME</option>
                                             </select>
                                         </td>
-                                        <td><input type="number" th:field="*{value}" /></td>
+                                        <td><input type="number" required = "true" th:field="*{value}" /></td>
                                         <td><input type="submit" value="Add balance record" class="btn"/></td>
                                     </form>
                                 </tr>
@@ -179,6 +179,7 @@
 <script th:src="@{/js/jquery-3.0.0.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/prettify.min.js}"></script>
+<script th:src="@{/js/parsley.min.js}"></script>
 <script type="text/javascript" charset="utf8" th:src="@{/js/jquery.dataTables.js}"></script>
 <script type="text/javascript">
     $(document).ready( function () {
@@ -197,6 +198,8 @@
         table.ajax.reload();
     }, 30000 );
 
+    var formInstance = $('balance_record_add_form').parsley();
+    console.log(field.options.maxlength);
 </script>
 </body>
 </html>

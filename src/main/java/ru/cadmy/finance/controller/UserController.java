@@ -17,7 +17,6 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-
     private final static Logger logger = Logger.getLogger(UserController.class);
     public static final String HIDDEN_STYLE = "hidden";
     public static final String ALERT_SUCCESS_STYLE = "alert alert-success";

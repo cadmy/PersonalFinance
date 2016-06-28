@@ -11,6 +11,9 @@ import ru.cadmy.finance.service.*;
 import java.util.Map;
 
 import static ru.cadmy.finance.controller.UserController.HIDDEN_STYLE;
+import static ru.cadmy.finance.controller.UserController.ALERT_DANGER_STYLE;
+import static ru.cadmy.finance.controller.UserController.ALERT_SUCCESS_STYLE;
+
 
 
 /**
@@ -30,13 +33,34 @@ public class BalanceRecordController {
     private BalanceService balanceService;
 
 
-    @RequestMapping(value = {"/home", "/login", "/", "/PersonalFinance"})
+    @RequestMapping(value = {"/home", "/", "/PersonalFinance"})
     public String index(Map<String, Object> map) {
         map.put("balanceRecord", new BalanceRecord());
         map.put("balanceRecordList", balanceService.balanceRecordList(userService.getCurrentUser()));
         map.put("messageStyle", messageStyle);
         map.put("systemMessage", systemMessage);
         clearSystemMessage();
+        return "index";
+    }
+
+    @RequestMapping(value = "/login")
+    public String loginindex(Map<String, Object> map,
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout) {
+
+        if (error != null) {
+            map.put("messageStyle", ALERT_DANGER_STYLE);
+            map.put("systemMessage", "Incorrect username or password.");
+            clearSystemMessage();
+            return "index";
+        }
+
+        if (logout != null) {
+            map.put("messageStyle", ALERT_SUCCESS_STYLE);
+            map.put("systemMessage", "You've been logged out successfully.");
+            clearSystemMessage();
+            return "index";
+        }
         return "index";
     }
 

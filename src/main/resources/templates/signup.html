@@ -11,7 +11,7 @@
 </head>
 <body onload="prettyPrint();">
     <div class="container" sec:authorize="isAnonymous()">
-        <form id="form" action="#" method="post" th:action="@{/add_person}" th:object="${user}" class="form-vertical">
+        <form id="signup_form" action="#" method="post" th:action="@{/add_person}" th:object="${user}" class="form-vertical">
             <div class="form-group row">
                 <label path="email">Email</label>
                 <input required = "true" data-parsley-maxlength="500" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}" />
@@ -50,7 +50,7 @@
     </div>
 
     <div class="container">
-        <a href="/" class="btn">Back</a>
+        <a href="/PersonalFinance/" class="btn">Back</a>
     </div>
 
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -59,7 +59,7 @@
 <script th:src="@{/js/parsley.min.js}"></script>
 
 <script type="text/javascript">
-    var formInstance = $('form').parsley();
+    var formInstance = $('signup_form').parsley();
     console.log(field.options.maxlength);
 </script>
 
