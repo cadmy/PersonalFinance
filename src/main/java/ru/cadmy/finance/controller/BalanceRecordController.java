@@ -115,6 +115,12 @@ public class BalanceRecordController {
         return "redirect:/PersonalFinance/";
     }
 
+    @RequestMapping(value = "/edit/{balanceRecordId}", method = RequestMethod.POST)
+    public String editBalanceRecord(Map<String, Object> map, @PathVariable("balanceRecordId") Long balanceRecordId) {
+        map.put("balanceRecord", balanceService.getBalanceRecordById(balanceRecordId));
+        return "redirect:/PersonalFinance/edit/".join(balanceRecordId.toString());
+    }
+
     public void getSystemMessage(String message, String style){
         messageStyle = style;
         systemMessage = message;
