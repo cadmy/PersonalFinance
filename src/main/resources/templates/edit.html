@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Edit balance record</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    </link>
+    <link th:href="@{/css/jumbotron.css}" rel="stylesheet">
+    </link>
+</head>
+<body onload="prettyPrint();">
+<div class="container" sec:authorize="isAuthenticated()">
+    <form id="edit_form" action="#" method="post" th:action="@{/commit/__${balanceRecord.id}__}" th:object="${balanceRecord}" class="form-vertical">
+        <div class="form-group row">
+            <label path="date">Date</label>
+            <input type="date" th:field="*{date}" />
+        </div>
+
+        <div class="form-group row">
+            <label path="category">Category</label>
+            <input data-parsley-maxlength="500" type="text" th:field="*{category}" />
+        </div>
+
+        <div class="form-group row">
+            <label path="title">Title</label>
+            <input data-parsley-maxlength="500" type="text" th:field="*{title}" />
+        </div>
+
+        <if th:if="${balanceRecord.sign.getValue() == 1}">
+            <div class="form-group row">
+                <label path="sign">Type</label>
+                <select th:field="*{sign}">
+                    <option value="COST" selected="selected">COST</option>
+                    <option value="INCOME">INCOME</option>
+                </select>
+            </div>
+        </if>
+
+        <if th:if="${balanceRecord.sign.getValue() == 2}">
+            <div class="form-group row">
+                <label path="sign">Type</label>
+                <select th:field="*{sign}">
+                    <option value="COST">COST</option>
+                    <option value="INCOME" selected="selected">INCOME</option>
+                </select>
+            </div>
+        </if>
+
+        <div class="form-group row">
+            <label path="value">Value</label>
+            <input data-parsley-maxlength="500" type="number" th:field="*{value}" />
+        </div>
+
+        <input type="submit" value="Commit" class="btn btn-primary btn-large" />
+    </form>
+</div>
+
+<div sec:authorize="isAnonymous()" class="container">
+    <p>Sorry, you don't have a permission to edit records.</p>
+</div>
+
+<div class="container">
+    <a href="/PersonalFinance/" class="btn">Back</a>
+</div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/prettify.min.js}"></script>
+<script th:src="@{/js/jquery-3.0.0.min.js}"></script>
+<script th:src="@{/js/parsley.min.js}"></script>
+
+<script type="text/javascript">
+    var formInstance = $('edit_form').parsley();
+    console.log(field.options.maxlength);
+</script>
+
+</body>
+</html>
