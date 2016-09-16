@@ -108,7 +108,7 @@ public class BalanceRecordController {
         return "{}";
     }
 
-    @RequestMapping(value = "/delete/{balanceRecordId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete/{balanceRecordId}", method = RequestMethod.POST) //html forms doesn't support RequestMethod.DELETE
     public String deleteBalanceRecord(@PathVariable("balanceRecordId") Long balanceRecordId) {
         balanceService.removeBalanceRecord(balanceRecordId);
         logger.info("Balance record #".join(balanceRecordId.toString()).join(" was deleted"));
@@ -121,8 +121,28 @@ public class BalanceRecordController {
         return "edit";
     }
 
-    @RequestMapping(value = "/edit_commit", method = RequestMethod.POST)
-    public String editBalanceRecord(Map<String, Object> map, BalanceRecord balanceRecord) {
+    @RequestMapping(value = "/commit/{balanceRecordId}", method = RequestMethod.POST)
+    public String editBalanceRecord(@PathVariable("balanceRecordId") Long balanceRecordId, BalanceRecord balanceRecord) {
+        balanceRecord.setId(balanceRecordId);
+        BalanceRecord storedBalanceRecord = balanceService.getBalanceRecordById(balanceRecordId);
+        if (balanceRecord.getUser() == null) {
+            balanceRecord.setUser(storedBalanceRecord.getUser());
+        }
+        if (balanceRecord.getDate() == null) {
+            balanceRecord.setDate(storedBalanceRecord.getDate());
+        }
+        if (balanceRecord.getSign() == null) {
+            balanceRecord.setSign(storedBalanceRecord.getSign());
+        }
+        if (balanceRecord.getValue() == null) {
+            balanceRecord.setValue(storedBalanceRecord.getValue());
+        }
+        if (balanceRecord.getCategory() == null) {
+            balanceRecord.setCategory(storedBalanceRecord.getCategory());
+        }
+        if (balanceRecord.getTitle() == null) {
+            balanceRecord.setTitle(storedBalanceRecord.getTitle());
+        }
         balanceService.editBalanceRecord(balanceRecord);
         return "redirect:/PersonalFinance/";
     }

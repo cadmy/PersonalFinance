@@ -2,13 +2,17 @@ package ru.cadmy.finance.model;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "USER")
-public
-@Data
-class User {
+public @Data class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -45,10 +49,6 @@ class User {
         this.role = role;
         this.state = state;
         this.username = username;
-    }
-
-    public User() {
-
     }
 
 }

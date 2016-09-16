@@ -1,7 +1,10 @@
 package ru.cadmy.finance.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,10 +19,11 @@ import javax.persistence.Table;
  * Created by Cadmy on 21.03.2016.
  */
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "BALANCE")
-public
-@Data
-class BalanceRecord {
+public @Data class BalanceRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,10 +50,6 @@ class BalanceRecord {
 
     @Column(name = "title", nullable = true, length = 500)
     private String title;
-
-    public BalanceRecord(){
-
-    }
 
     public BalanceRecord(User user, Date date, Sign sign, Integer value, String category, String title){
         this.user = user;
