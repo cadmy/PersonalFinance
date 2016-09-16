@@ -115,10 +115,16 @@ public class BalanceRecordController {
         return "redirect:/PersonalFinance/";
     }
 
-    @RequestMapping(value = "/edit/{balanceRecordId}", method = RequestMethod.POST)
-    public String editBalanceRecord(Map<String, Object> map, @PathVariable("balanceRecordId") Long balanceRecordId) {
+    @RequestMapping(value = {"/edit/{balanceRecordId}"})
+    public String edit(Map<String, Object> map, @PathVariable("balanceRecordId") Long balanceRecordId) {
         map.put("balanceRecord", balanceService.getBalanceRecordById(balanceRecordId));
-        return "redirect:/PersonalFinance/edit/".join(balanceRecordId.toString());
+        return "edit";
+    }
+
+    @RequestMapping(value = "/edit_commit", method = RequestMethod.POST)
+    public String editBalanceRecord(Map<String, Object> map, BalanceRecord balanceRecord) {
+        balanceService.editBalanceRecord(balanceRecord);
+        return "redirect:/PersonalFinance/";
     }
 
     public void getSystemMessage(String message, String style){

@@ -81,6 +81,12 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
 
     @Override
     @Transactional
+    public void editBalanceRecord(BalanceRecord balanceRecord) {
+        em.merge(balanceRecord);
+    }
+
+    @Override
+    @Transactional
     public void removeBalanceRecord(Long balanceRecordId) {
         BalanceRecord balanceRecord = em.find(BalanceRecord.class, balanceRecordId);
         if (balanceRecord != null) {

@@ -28,6 +28,8 @@ public interface BalanceService {
 
     BalanceRecord getBalanceRecordById(Long id);
 
+    void editBalanceRecord(BalanceRecord balanceRecord);
+
     void removeBalanceRecord(Long balanceRecordId);
 }
 
