@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.cadmy.finance.model.BalanceRecord;
+import ru.cadmy.finance.model.Sign;
 import ru.cadmy.finance.service.*;
 
 import java.util.Date;
@@ -143,6 +144,7 @@ public class BalanceRecordController {
         if (balanceRecord.getTitle() == null) {
             balanceRecord.setTitle(storedBalanceRecord.getTitle());
         }
+
         balanceService.editBalanceRecord(balanceRecord);
         return "redirect:/PersonalFinance/";
     }
