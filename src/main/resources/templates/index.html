@@ -141,14 +141,14 @@
                                     <td th:text="${balanceRecord.sign}"></td>
                                     <td type="number" th:text="${balanceRecord.value}"></td>
                                     <td>
-                                            <div style="float: left; margin-right: 5px;">
-                                                <a th:href="@{/edit/__${balanceRecord.id}__}" class="btn btn-default btn-mini">Edit</a>
-                                            </div>
-                                            <div style="float: left;">
-                                                <form action="#" method="post" th:action="@{/delete/__${balanceRecord.id}__}">
-                                                    <input type="submit" class="btn btn-danger btn-mini" value="Delete"/>
-                                                </form>
-                                            </div>
+                                        <div style="float: left; margin-right: 5px;">
+                                            <a th:href="@{/edit/__${balanceRecord.id}__}" class="btn btn-default btn-mini">Edit</a>
+                                        </div>
+                                        <div style="float: left;">
+                                            <form action="#" method="post" th:action="@{/delete/__${balanceRecord.id}__}">
+                                                <input type="submit" class="btn btn-danger btn-mini" value="Delete"/>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             </if>

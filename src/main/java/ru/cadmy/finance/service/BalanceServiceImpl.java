@@ -1,9 +1,12 @@
 package ru.cadmy.finance.service;
 
+import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.cadmy.finance.model.*;
+import ru.cadmy.finance.repository.BalanceRecordRepository;
 
 import javax.persistence.criteria.*;
 
@@ -16,6 +19,9 @@ import java.util.List;
 @Service
 public class BalanceServiceImpl extends ModelService implements BalanceService {
 
+    @Autowired
+    BalanceRecordRepository balanceRecordRepository;
+
     @Override
     @Transactional
     public void addBalanceRecord(BalanceRecord balanceRecord) {
@@ -23,6 +29,7 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
     }
 
     @Override
+    @Transactional
     public List<BalanceRecord> balanceRecordList() {
         CriteriaQuery<BalanceRecord> c = em.getCriteriaBuilder().createQuery(BalanceRecord.class);
         c.from(BalanceRecord.class);
@@ -56,7 +63,9 @@ public class BalanceServiceImpl extends ModelService implements BalanceService {
 
     @Override
     public List<BalanceRecord> balanceRecordList(User user, Date dateFrom, Date dateTo) {
-        return null;
+        DateTime nextDayLimit = new DateTime(dateTo);
+        nextDayLimit = nextDayLimit.plusDays(1);
+        return balanceRecordRepository.getBalanceRecordsForPeriod(user, dateFrom, nextDayLimit.toDate());
     }
 
     @Override

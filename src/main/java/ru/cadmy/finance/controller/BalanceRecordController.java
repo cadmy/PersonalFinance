@@ -1,6 +1,7 @@
 package ru.cadmy.finance.controller;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,7 +39,8 @@ public class BalanceRecordController {
     @RequestMapping(value = {"/home", "/", "/PersonalFinance"})
     public String index(Map<String, Object> map) {
         map.put("balanceRecord", new BalanceRecord());
-        map.put("balanceRecordList", balanceService.balanceRecordList(userService.getCurrentUser()));
+        DateTime dateFrom = new DateTime();
+        map.put("balanceRecordList", balanceService.balanceRecordList(userService.getCurrentUser(), dateFrom.minusMonths(1).toDate(), new Date()));
         map.put("messageStyle", messageStyle);
         map.put("systemMessage", systemMessage);
         clearSystemMessage();
@@ -144,7 +146,6 @@ public class BalanceRecordController {
         if (balanceRecord.getTitle() == null) {
             balanceRecord.setTitle(storedBalanceRecord.getTitle());
         }
-
         balanceService.editBalanceRecord(balanceRecord);
         return "redirect:/PersonalFinance/";
     }

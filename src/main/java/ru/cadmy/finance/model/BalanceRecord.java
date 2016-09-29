@@ -29,7 +29,7 @@ public @Data class BalanceRecord {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "user")
     private User user;
 
