@@ -5,13 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ru.cadmy.finance.model.*;
-import ru.cadmy.finance.repository.BalanceRecordRepository;
-
-import javax.persistence.criteria.*;
-
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import ru.cadmy.finance.model.BalanceRecord;
+import ru.cadmy.finance.model.State;
+import ru.cadmy.finance.model.User;
+import ru.cadmy.finance.repository.BalanceRecordRepository;
 
 /**
  * Created by Cadmy on 22.03.2016.
